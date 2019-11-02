@@ -32,8 +32,27 @@ class Core
         require_once '../app/controllers/' . $this->currentController . '.php';
 
         // Instantiate ontroller class
-
         $this->currentController = new $this->currentController;
+
+
+        // check for second part of url
+
+        if (isset($url[1])) {
+            //check if method exists
+            if (method_exists($this->currentController, $url[1])) {
+                $this->currentMethod = $url[1];
+
+                //unset 1 index
+                unset($url[1]);
+            }
+        }
+
+        // get params
+        $this->params = $url ? array_values($url) : [];
+
+        // Call a callback with array params
+
+        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 
 
