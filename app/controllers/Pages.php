@@ -1,7 +1,7 @@
 <?php
 
 
-class Pages
+class Pages extends Controller
 {
     public function __construct()
     {
@@ -9,11 +9,14 @@ class Pages
 
     public function index()
     {
-        echo 'Im in index.';
+        $data = ['title' => 'Welcome'];
+        $this->view('pages/index', $data);
     }
 
-    public function about($id)
+    public function about()
     {
-        echo 'This is about site';
+        $data = ['title' => 'Welcome'];
+        $data = ['title' => 'About'];
+        $this->view('pages/about', $data);
     }
 }
